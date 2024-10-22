@@ -84,7 +84,7 @@ class PembimbingController extends Controller
 
         $pembimbing->delete();
 
-        return redirect()->back()->with('success', 'Data Pembimbing Berhasil si Hapus.');
+        return redirect()->back()->with('success', 'Data Pembimbing Berhasil di Hapus.');
     }
 
 

@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('guru.layouts.app')
 
 @section('title', 'Pembimbing')
 
@@ -14,7 +14,6 @@
             @endif
             <h6 class="mb-4">Data Pembimbing</h6>
                 <div class="table-responsive">
-                    <a href="{{ route('admin.pembimbing.create')}}" class="btn btn-primary btn-sm">Tambah</a>
                     <table class="table" id="pembimbing">
                         <thead>
                             <tr>
@@ -31,9 +30,7 @@
                                     <td>{{ $pembimbing->guru->nama_guru }}</td>
                                     <td>{{ $pembimbing->dudi->nama_dudi }}</td>
                                     <td>
-                                        <a href=" {{ route('admin.pembimbing.edit', $pembimbing->id_pembimbing) }}" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="{{ route('admin.pembimbing.delete', $pembimbing->id_pembimbing) }}" onclick="return confirm('Yakin Ingin Hapus Data?')" class="btn btn-danger btn-sm">Hapus</a>
-                                        <a href="{{ route('admin.pembimbing.siswa', $pembimbing->id_pembimbing) }}" class="btn btn-info btn-sm">Siswa</a>
+                                        <a href="{{ route('guru.pembimbing.siswa', $pembimbing->id_pembimbing) }}" class="btn btn-info btn-sm">Siswa</a>
                                     </td>
                                 </tr>
                                 @endforeach

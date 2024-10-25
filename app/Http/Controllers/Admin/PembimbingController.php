@@ -99,6 +99,7 @@ class PembimbingController extends Controller
 
     public function pembimbingGuru() 
     {
+        
         $id_guru = Auth::guard('guru')->user()->id_guru;
         $pembimbings = Pembimbing::where('id_guru', $id_guru)->get();
         return view('guru.pembimbing', compact('pembimbings'));

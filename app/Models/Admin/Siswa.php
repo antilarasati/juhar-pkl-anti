@@ -29,4 +29,9 @@ class Siswa extends Model
         return $this->belongsTo(Pembimbing::class, 'id_pembimbing', 'id_pembimbing');
     }
 
+    public function kegiatan()
+    {
+        return $this->hasMany(Kegiatan::class, 'id_siswa', 'id_siswa');
+    }
+
 }

@@ -49,17 +49,17 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="{{ asset('storage/' . Auth::guard('guru')->user()->foto) }}" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="{{ asset('storage/' . Auth::guard('siswa')->user()->foto) }}" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">{{ Auth::guard('guru')->user()->nama_guru }}</h6>
-                        <span>Admin</span>
+                        <h6 class="mb-0">{{ Auth::guard('siswa')->user()->nama_siswa }}</h6>
+                        <span>Siswa</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="{{ route('guru.dashboard') }}" class="nav-item nav-link {{ request()->routeIs('guru.dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <a href="{{ route('guru.pembimbing') }}" class="nav-item nav-link {{ request()->routeIs('guru.pembimbing*') ? 'active' : '' }}"><i class="fa fa-table me-2"></i>Pembimbing</a>
+                    <a href="{{ route('siswa.dashboard') }}" class="nav-item nav-link {{ request()->routeIs('siswa.dashboard') ? 'active' : '' }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="{{ route('siswa.kegiatan') }}" class="nav-item nav-link {{ request()->routeIs('siswa.kegiatan') ? 'active' : '' }}"><i class="fa fa-table me-2"></i>Kegiatan</a>
                 </div>
             </nav>
         </div>
@@ -82,12 +82,12 @@
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                              
-                            <span class="d-none d-lg-inline-flex">{{ Auth::guard('guru')->user()->nama_guru}}</span>
+                        <img class="rounded-circle me-lg-2" src="{{ asset('storage/' . Auth::guard('siswa')->user()->foto) }}" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex">{{ Auth::guard('siswa')->user()->nama_siswa}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                            <a href="{{ route('guru.profile') }}" class="dropdown-item">My Profile</a>
-                            <a href="{{ route('guru.logout') }}" class="dropdown-item">Log Out</a>
+                        <a href="{{ route('siswa.profile') }}" class="dropdown-item">My Profile</a>
+                        <a href="{{ route('siswa.logout') }}" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
                 </div>

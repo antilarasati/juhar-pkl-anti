@@ -34,8 +34,51 @@ class KegiatanController extends Controller
 
     public function detailKegiatan($id, $id_siswa, $id_kegiatan)
     {
-        $kegiatan = Kegiatan::where('id_kegiatan', $id_kegiatan);
-        return view('guru.detail_kegiatan', compact('kegiatan'));
+        $loginGuru = Auth::guard('guru')->user()->id_guru;
+        $siswa = Siswa::find($id_siswa);
+        if (!$siswa || !$siswa->id_pembimbing) {
+                return back()->withErrors(['access' => 'Siswa tidak ditemukan atau tidak memiliki pembimbing.']);
+            }
+        if ($siswa->id_pembimbing != $id) {
+            return back()->withErrors(['access' => 'Pembimbing tidak sesuai.']);
+            }
+        $pembimbing = Pembimbing::find($id);
+        if (!$pembimbing || $pembimbing->id_guru !== $loginGuru) {
+        return back()->withErrors(['access' => 'Akses Anda ditolak. Siswa ini tidak dibimbing oleh anda.']);
+        }
+
+        $kegiatan = Kegiatan::where('id_kegiatan', $id_kegiatan)
+                            ->where('id_siswa', $id_siswa)
+                            ->first();
+
+        if (!$kegiatan) {
+            return back()->withErrors(['accsess'=> 'Kegiatan tidak tersedia']);
+        }
+        return view('guru.detail_kegiatan', compact('id', 'kegiatan'));
+    } 
+
+    public function kegiatanSiswa()
+    {
+        $id_siswa = Auth::guard('siswa')->user()->id_siswa;
+        $kegiatans = Kegiatan::where('id_siswa', $id_siswa)->get();
+        return view('siswa.kegiatan', compact('kegiatans'));
+
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

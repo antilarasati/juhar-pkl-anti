@@ -14,7 +14,7 @@
             @endif
             <h6 class="mb-4">Data Kegiatan</h6>
                 <div class="table-responsive">
-                    <a href="" class="btn btn-primary btn-sm">Tambah</a>
+                    <a href="{{ route('siswa.kegiatan.store')}}" class="btn btn-primary btn-sm">Tambah</a>
                     <table class="table" id="kegiatan">
                         <thead>
                             <tr>
@@ -31,8 +31,9 @@
                                     <td>{{ $kegiatan->tanggal_kegiatan }}</td>
                                     <td>{{ $kegiatan->nama_kegiatan }}</td>
                                     <td>
-                                        <a href="" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                        <a href="{{ route('siswa.kegiatan.update', ['id_kegiatan'=>$kegiatan->id_kegiatan]) }}" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="{{ route('siswa.kegiatan.delete', ['id_kegiatan'=>$kegiatan->id_kegiatan]) }}" class="btn btn-danger btn-sm">Hapus</a>
+                                        <a href="{{ route('siswa.kegiatan.detail', ['id_kegiatan'=>$kegiatan->id_kegiatan]) }}" class="btn btn-primary btn-sm">Detail</a>
                                     </td>
                                 </tr>
                                 @endforeach

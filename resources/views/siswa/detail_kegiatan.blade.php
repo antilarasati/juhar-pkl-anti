@@ -1,4 +1,4 @@
-@extends('guru.layouts.app')
+@extends('siswa.layouts.app')
 
 @section('title', 'Detail Kegiatan')
 
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                                 
-            <a href="{{ route('guru.pembimbing.siswa.kegiatan', ['id'=> $id, 'id_siswa' => $kegiatan->id_siswa]) }}" class="btn btn-primary">Kembali</a>
+            <a href="{{ route('siswa.kegiatan') }}" class="btn btn-primary">Kembali</a>
         </div>
     </div>
 </div>

@@ -19,6 +19,11 @@ class SiswaController extends Controller
     {
         $siswas = Siswa::where('id_pembimbing', $id)->get();
         $siswa = Siswa::where('id_pembimbing', $id)->first();
+
+        $pembimbing = pembimbing::find(id: $id);
+        if (!$pembimbing) {
+            return back();
+        }
         return view('admin.siswa', compact('siswas', 'siswa', 'id'));
     }
 
@@ -27,6 +32,10 @@ class SiswaController extends Controller
      */
     public function create($id)
     {
+        $pembimbing = pembimbing::find(id: $id);
+        if (!$pembimbing) {
+            return back();
+        }
         return view('admin.tambah_siswa', compact('id'));
     }
 
@@ -77,6 +86,14 @@ class SiswaController extends Controller
     public function edit(string $id, $id_siswa)
     {
         {
+            $pembimbing = pembimbing::find(id: $id);
+            if (!$pembimbing) {
+                return back();
+            }
+            $siswa = siswa::find(id: $id);
+            if (!$siswa) {
+                return back();
+            }
             $siswa = Siswa::find($id_siswa);
             return view('admin.edit_siswa', compact('siswa','id'));
         }
@@ -89,7 +106,7 @@ class SiswaController extends Controller
             $request->validate([
             'nisn' => 'required|digits:10|unique:siswa,nisn,' . $siswa->id_siswa . ',id_siswa',
             'nama_siswa' => 'required',
-            'password' => 'required|min:6',
+            'password' => 'nullable|min:6',
             'foto' => 'nullable|image|mimes:jpeg,jpg,png,gif|max:2048',
             ]);
     

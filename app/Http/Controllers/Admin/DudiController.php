@@ -57,6 +57,10 @@ class DudiController extends Controller
     public function edit(string $id)
     {
         $dudi = Dudi::find($id);
+
+        if (!$dudi) {
+            return back();
+        }
         return view('admin.edit_dudi', compact('dudi'));
     }
 

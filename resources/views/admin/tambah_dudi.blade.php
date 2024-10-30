@@ -11,7 +11,7 @@
                             <form action="{{ route('admin.dudi.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
-                                    <label for="Dudi" class="form-label">Dudi</label>
+                                    <label for="Nama_dudi" class="form-label">Nama Dudi</label>
                                     <input type="text" class="form-control" id="nama_dudi" name="nama_dudi">
                                     <div class="text-danger">
                                         @error('nama_dudi')
@@ -20,7 +20,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="Alamat" class="form-label">Alamat</label>
+                                    <label for="Alamat_dudi" class="form-label">Alamat Dudi</label>
                                     <input type="text" class="form-control" id="alamat_dudi" name="alamat_dudi">
                                     <div class="text-danger">
                                         @error('nama_dudi')

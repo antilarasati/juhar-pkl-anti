@@ -20,7 +20,7 @@
                                     </div>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="siswa" class="form-label">Siswa</label>
+                                    <label for="siswa" class="form-label">Nama Siswa</label>
                                     <input type="text" class="form-control" id="nama_siswa" name="nama_siswa">
                                     <div class="text-danger">
                                         @error('nama_siswa')

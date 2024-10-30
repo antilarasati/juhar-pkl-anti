@@ -30,7 +30,7 @@ class KegiatanController extends Controller
         $kegiatans = Kegiatan::where('id_siswa', $id_siswa)->get();
         $kegiatan = Kegiatan::where('id_siswa', $id_siswa)->first();
         $id_pembimbing = $id;
-        return view('guru.kegiatan', compact('id_pembimbing', 'kegiatans', 'kegiatan'));
+        return view('guru.kegiatan', compact('id_pembimbing','id_siswa', 'kegiatans', 'kegiatan'));
     }
 
     public function detailKegiatan($id, $id_siswa, $id_kegiatan)
@@ -184,6 +184,42 @@ class KegiatanController extends Controller
         }
         return view('siswa.detail_kegiatan', compact('kegiatan'));
     } 
+
+    public function cariKegiatan(Request $request, $id, $id_siswa)
+    {
+        $request->validate([
+            'tanggal_awal' => 'required|date',
+            'tanggal_akhir' => 'required|date|after_or_equal:tanggal_awal',
+        ]);
+
+        $tanggalAwal = $request->input('tanggal_awal');
+        $tanggalAkhir = $request->input('tanggal_akhir');
+
+        $loginGuru = Auth::guard('guru')->user()->id_guru;
+        $siswa = Siswa::find($id_siswa);
+        if (!$siswa || !$siswa->id_pembimbing) {
+                return back()->withErrors(['access' => 'Siswa tidak ditemukan atau tidak memiliki pembimbing.']);
+            }
+        if ($siswa->id_pembimbing != $id) {
+            return back()->withErrors(['access' => 'Pembimbing tidak sesuai.']);
+            }
+        $pembimbing = Pembimbing::find($id);
+        if (!$pembimbing || $pembimbing->id_guru !== $loginGuru) {
+           return back()->withErrors(['access' => 'Akses Anda ditolak. Siswa ini tidak dibimbing oleh anda.']);
+        }
+
+        $kegiatans = Kegiatan::where('id_siswa', $id_siswa)
+            ->whereBetween('tanggal_kegiatan', [$tanggalAwal, $tanggalAkhir])
+            ->get();
+
+        $kegiatan = Kegiatan::where('id_siswa', $id_siswa)
+            ->whereBetween('tanggal_kegiatan', [$tanggalAwal, $tanggalAkhir])
+            ->first();
+
+        $id_pembimbing = $id;
+
+        return view('guru.kegiatan', compact('kegiatans', 'kegiatan', 'id_pembimbing', 'id_siswa', 'tanggalAwal', 'tanggalAkhir'));
+    }
 }
 
 
